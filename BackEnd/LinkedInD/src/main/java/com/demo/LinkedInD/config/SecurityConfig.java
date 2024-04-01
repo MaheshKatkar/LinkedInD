@@ -38,12 +38,12 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf().disable().authorizeHttpRequests()
-                .requestMatchers( "/auth/generateToken").permitAll()
+                .requestMatchers( "/auth/generateToken","/auth/addNewUser").permitAll()
                 .and()
-//                .authorizeHttpRequests().requestMatchers("/auth/user/**").has.authenticated()
-//                .and()
-//                .authorizeHttpRequests().requestMatchers("/auth/admin/**").authenticated()
-//                .and()
+                .authorizeHttpRequests().requestMatchers("/auth/user/**").authenticated()
+                .and()
+                .authorizeHttpRequests().requestMatchers("/auth/admin/**").authenticated()
+                .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
